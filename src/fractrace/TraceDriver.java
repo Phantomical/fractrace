@@ -61,6 +61,29 @@ public final class TraceDriver {
 		return traceImpl(dat);
 	}
 
+	public static Vector tracePixel(Scene sc, int x, int y) {
+		TraceResult[] results = new TraceResult[sc.samples];
+		
+		final double xmult = 2.0 / ((double)sc.height - 1);
+		final double ymult = 2.0 / ((double)sc.width - 1);
+
+		for (int sample = 0; sample < sc.samples; ++sample) {
+			final double jitterx = Math.random() * xmult * 0;
+			final double jittery = Math.random() * ymult * 0;
+			final double posy = (((double)y + jitterx) * xmult) - 1;
+			final double posx = (((double)x + jittery) * ymult) - 1;
+			results[sample] = traceRay(sc, new Ray(sc.camera, posx, posy));
+		}
+		
+		for (ImagePass pass : sc.passes) {
+			for (int sample = 0; sample < sc.samples; ++sample) {
+				pass.execute(results[sample]);
+			}
+		}
+		
+		return Postprocess.realizeKernel(results, sc.background);
+	}
+	
 	public static TraceResult[][][] traceScene(Scene sc) {
 		TraceResult[][][] results = new TraceResult[sc.height][sc.width][sc.samples];
 

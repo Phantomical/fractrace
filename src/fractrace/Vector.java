@@ -143,6 +143,9 @@ public final class Vector {
 				Math.max(a.y, b.y),
 				Math.max(a.z, b.z));
 	}
+	public static Vector clamp(Vector a, double min, double max) {
+		return max(min(a, new Vector(max, max, max)), new Vector(min, min, min));
+	}
 	
 	public Vector negate() {
 		return mul(this, -1);

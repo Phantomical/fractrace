@@ -7,34 +7,12 @@ import java.nio.file.Paths;
 
 import javax.imageio.ImageIO;
 
-import fractrace.shapes.*;
-
 public class Entry {
-	private static final double DEG2RAD = Math.PI / 180;
-	
-	public static Scene scene = new Scene(
-			new Camera(
-					new Vector(0, 2, 0),
-					new Vector(0, -0.2, -1),
-					new Vector(0, 1, 0),
-					80 * DEG2RAD,
-					60 * DEG2RAD),
-			new Traceable[] {
-					//new Sierpinski(2, new Vector(0, 0, 0), 2, new Vector(1, 0, 0)),				
-					new Modulus(new Sphere(new Vector(0, 0, 0), new Vector(1, 0, 0), 1), new Vector(3, 1000005, 3)),
-					//new Mandelbulb(new Vector(0, 0, 0), new Vector(1, 0, 0), 8, 20),
-					new Plane(new Vector(0, -2, 0), new Vector(0, 1, 0), new Vector(0.8, 0.8, 0.8))
-			},
-			1000,
-			750,
-			new Vector(1, 0, 1),
-			10000,
-			1e-8,
-			1
-			);
-	
+	public static Scene scene;
 	
 	public static void main(String[] args) {
+		Scene scene = null;
+		
 		try {
 			String config = readFile(args[0]);
 			SceneBuilder builder = new SceneBuilder(config);
@@ -43,6 +21,8 @@ public class Entry {
 			System.err.println("Unable to find given configuration file!");
 			System.exit(1);
 		}
+		
+		assert(scene != null);
 		
 		final Vector lightdir = new Vector(0, -1, -0.2);
 				
@@ -56,7 +36,7 @@ public class Entry {
 		BufferedImage image = makeImage(pixels);
 		
 		try {
-			File outputFile = new File("D:\\output.png");
+			File outputFile = new File(scene.targetFile);
 			ImageIO.write(image, "png", outputFile);
 		} catch (IOException e) {
 			System.out.println("Unable to write to file!");

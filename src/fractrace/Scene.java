@@ -1,6 +1,7 @@
 package fractrace;
 
 public final class Scene {
+	public String targetFile;
 	public Camera camera;
 	public Traceable[] objects;
 	public int width;
@@ -9,6 +10,7 @@ public final class Scene {
 	public double maxDistance;
 	public double threshold;
 	public int samples;
+	public ImagePass[] passes;
 	
 	public Scene() {
 		width = 100;
@@ -17,6 +19,7 @@ public final class Scene {
 		maxDistance = 1e15;
 		threshold = 1e-15;
 		samples = 8;
+		passes = new ImagePass[0];
 	}
 	public Scene(
 			Camera camera,
@@ -35,5 +38,6 @@ public final class Scene {
 		this.maxDistance = maxDistance;
 		this.threshold = threshold;
 		this.samples = samples;
+		this.passes = new ImagePass[0];
 	}
 }
