@@ -1,0 +1,66 @@
+
+{
+	"targetFile": "output.png",
+	"camera": {
+		"position": [0, 18, -5],
+		"forward": [0, 0, 1],
+		"up": [0, 1, 0],
+		"fovx": 80,
+		"fovy": 60
+	},
+	"width": 2000,
+	"height": 1500,
+	"background": [1, 0, 1],
+	"maxDistance": 10000,
+	"threshold": 1e-8,
+	"samples": 10,
+	"objects": [ 
+		{ 
+			"type": "modulus",
+			"subobject": {
+				"type": "sphere",
+				"position": [0, 0, 0],
+				"colour": [1, 0, 0],
+				"radius": 1
+			},
+			"modulus": [3, 100005, 3]
+		},
+		{
+			"type": "scale",
+			"subobject": {
+				"type": "mandelbulb",
+				"position": [0, 0, 0],
+				"colour": [1, 1, 1],
+				"power": 8,
+				"iterations": 5
+			},
+			"scale": 20
+		},
+		{
+			"type": "plane",
+			"position": [0, -1, 0],
+			"normal": [0, 1, 0],
+			"colour": [0.8, 0.8, 0.8]
+		}
+	],
+	"passes": [
+		{
+			"pass": "hardShadow",
+			"lightdir": [0, -1, -0.2]
+		},
+		{
+			"pass": "phongLighting",
+			"lightdir": [0, -1, -0.2],
+			"colour": [1, 1, 1]
+		},
+		{
+			"pass": "ambientOcclusion",
+			"offset": 0.005,
+			"mult": 0.1
+		},
+		{
+			"pass": "ambientLighting",
+			"colour": [0.1, 0.1, 0.1]
+		}
+	]
+}
