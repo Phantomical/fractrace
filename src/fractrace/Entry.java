@@ -11,6 +11,11 @@ public class Entry {
 	public static Scene scene;
 	
 	public static void main(String[] args) {
+		if (args.length == 0) {
+			System.out.println("usage: fractrace <scene-desc.json>");
+			System.exit(1);
+		}
+		
 		Scene scene = null;
 		
 		try {
@@ -24,15 +29,7 @@ public class Entry {
 		
 		assert(scene != null);
 		
-		final Vector lightdir = new Vector(0, -1, -0.2);
-				
-		TraceResult[][][] results = TraceDriver.traceScene(scene);
-		
-		Postprocess.doHardShadowPass(results, lightdir, scene);
-		Postprocess.doPhongLighting(results, lightdir);
-		Postprocess.doAmbientPass(results, new Vector(0.5, 0.5, 0.5));
-		
-		Vector[][] pixels = Postprocess.realize(results, scene.background);
+		Vector[][] pixels = TraceDriver.traceScene(scene);
 		BufferedImage image = makeImage(pixels);
 		
 		try {

@@ -53,6 +53,10 @@ public final class TraceDriver {
 
 		return result;
 	}
+	
+	public static Tuple<Double, Traceable> calcStepDistance(Scene sc, Vector point) {
+		return calcMin(sc.objects, point);
+	}
 
 	public static TraceResult traceRay(Scene sc, Ray ray) {
 		Traceable[] possible = filter(sc.objects, ray);
@@ -84,24 +88,18 @@ public final class TraceDriver {
 		return Postprocess.realizeKernel(results, sc.background);
 	}
 	
-	public static TraceResult[][][] traceScene(Scene sc) {
-		TraceResult[][][] results = new TraceResult[sc.height][sc.width][sc.samples];
-
-		final double xmult = 2.0 / ((double)sc.height - 1);
-		final double ymult = 2.0 / ((double)sc.width - 1);
+	public static Vector[][] traceScene(Scene sc) {
+		Vector[][] image = new Vector[sc.height][sc.width];
+		
 		for (int y = 0; y < sc.height; ++y) {
-			System.out.println(y);
+			System.out.print("\r" + y);
 			for (int x = 0; x < sc.width; ++x) {
-				for (int sample = 0; sample < sc.samples; ++sample) {
-					final double jitterx = Math.random() * xmult * 0;
-					final double jittery = Math.random() * ymult * 0;
-					final double posy = (((double)y + jitterx) * xmult) - 1;
-					final double posx = (((double)x + jittery) * ymult) - 1;
-					results[y][x][sample] = traceRay(sc, new Ray(sc.camera, posx, posy));
-				}
+				image[y][x] = tracePixel(sc, x, y);
 			}
 		}
 
-		return results;
+		System.out.println();
+		
+		return image;
 	}
 }

@@ -12,7 +12,7 @@ public class Plane implements Traceable {
 	@Override
 	public double distanceFromPoint(Vector a) {
 		Vector w = sub(position, a).negate();
-		return Math.abs(dot(normal, w)) / normal.magnitude();
+		return dot(normal, w) / normal.magnitude();
 	}
 	
 	@Override

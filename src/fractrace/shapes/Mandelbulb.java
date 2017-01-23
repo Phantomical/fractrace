@@ -51,7 +51,7 @@ public class Mandelbulb implements Traceable {
 	
 	public Mandelbulb() {
 		position = new Vector(0, 0, 0);
-		colour = new Vector(0, 0, 0);
+		colour = new Vector(1, 1, 1);
 		power = 8;
 		iterations = 32;
 	} 

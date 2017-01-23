@@ -24,6 +24,7 @@ public class SceneBuilder {
 			}
 		} catch (JsonParseException e) {
 			scene = null;
+			System.err.print(e.getMessage());
 		} finally {
 			// Clear out all the hooks
 			hooks = null;			
@@ -36,6 +37,7 @@ public class SceneBuilder {
 				.enableHooks(Modulus.class)
 				.enableHooks(HardShadowPass.class)
 				.enableHooks(PhongLightingPass.class)
+				.enableHooks(AmbientOcclusionPass.class)
 				.createGsonBuilder();		
 		
 		gson = builder
@@ -87,6 +89,8 @@ public class SceneBuilder {
 				return gson.fromJson(elem, Sierpinski.class);
 			case "mandelbulb":
 				return gson.fromJson(elem, Mandelbulb.class);
+			case "scale":
+				return gson.fromJson(elem, Scale.class);
 			default:
 				throw new JsonParseException("Unknown shape type: " + typename);
 			}
@@ -110,6 +114,8 @@ public class SceneBuilder {
 				return gson.fromJson(elem, HardShadowPass.class);
 			case "phongLighting":
 				return gson.fromJson(elem, PhongLightingPass.class);
+			case "ambientOcclusion":
+				return gson.fromJson(elem, AmbientOcclusionPass.class);
 			default:
 				throw new JsonParseException("Unknown pass: " + typename);
 			}
