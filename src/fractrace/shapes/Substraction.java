@@ -6,7 +6,6 @@ import fractrace.Vector;
 public class Substraction implements Traceable {
 	private Traceable object1;
 	private Traceable object2;
-	private Vector colour = new Vector(1, 1, 1);
 	
 	@Override
 	public double distanceFromPoint(Vector a) {
@@ -17,7 +16,7 @@ public class Substraction implements Traceable {
 
 	@Override
 	public Vector colourAtPoint(Vector a) {
-		return colour;
+		return object1.colourAtPoint(a);
 	}
 
 }

@@ -1,8 +1,8 @@
 {
 	"targetFile": "output.png",
 	"camera": {
-		"position": [0, 5, 0],
-		"forward": [0, 0, 1],
+		"position": [0, 0.1, -1.1],
+		"forward": [0, -0.2, 1],
 		"up": [0, 1, 0],
 		"fovx": 80,
 		"fovy": 60
@@ -29,9 +29,19 @@
             "object2": {
                 "type": "plane",
                 "position": [0, 0, 0],
-                "normal": [0, 1, 0],
-                "colour": [0.8, 0.8, 0.8]
-            }
+                "normal": [0, 1, 0]
+            },
+            "colour": [0.8, 0.8, 0.8]
+        },
+        {
+            "type": "modulus",
+            "subobject": {
+                "type": "sphere",
+                "position": [0, 0, 0],
+                "colour": [1, 0, 0],
+                "radius": 0.3
+            },
+            "modulus": [3, 100005, 3]
         }
     ],
 	"passes": [
