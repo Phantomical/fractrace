@@ -29,9 +29,9 @@
             "object2": {
                 "type": "plane",
                 "position": [0, 0, 0],
-                "normal": [0, 1, 0]
-            },
-            "colour": [0.8, 0.8, 0.8]
+                "normal": [0, 1, 0],
+                "colour": [0.8, 0.8, 0.8]
+            }
         },
         {
             "type": "modulus",

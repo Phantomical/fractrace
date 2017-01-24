@@ -16,7 +16,7 @@ public class Substraction implements Traceable {
 
 	@Override
 	public Vector colourAtPoint(Vector a) {
-		return object1.colourAtPoint(a);
+		return object2.colourAtPoint(a);
 	}
 
 }
