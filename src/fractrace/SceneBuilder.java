@@ -93,6 +93,8 @@ public class SceneBuilder {
 				return gson.fromJson(elem, Scale.class);
 			case "union":
 				return gson.fromJson(elem, Union.class);
+			case "substraction":
+				return gson.fromJson(elem, Substraction.class);
 			default:
 				throw new JsonParseException("Unknown shape type: " + typename);
 			}

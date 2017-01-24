@@ -15,7 +15,7 @@
 	"samples": 10,
     "objects": [
         {
-            "type": "union",
+            "type": "substraction",
                 "object1": {
                 "type": "modulus",
                 "subobject": {
