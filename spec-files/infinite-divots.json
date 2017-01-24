@@ -1,7 +1,7 @@
 {
 	"targetFile": "output.png",
 	"camera": {
-		"position": [0, 18, -5],
+		"position": [0, 5, 0],
 		"forward": [0, 0, 1],
 		"up": [0, 1, 0],
 		"fovx": 80,
