@@ -19,6 +19,7 @@ public class Entry {
 		Scene scene = null;
 		
 		try {
+			// Build our scene from the configuration file
 			String config = readFile(args[0]);
 			SceneBuilder builder = new SceneBuilder(config);
 			scene = builder.create();
@@ -29,10 +30,13 @@ public class Entry {
 		
 		assert(scene != null);
 		
+		// Trace the scene
 		Vector[][] pixels = TraceDriver.traceScene(scene);
+		// Convert the scene to an image
 		BufferedImage image = makeImage(pixels);
 		
 		try {
+			// Write our scene as a png image
 			File outputFile = new File(scene.targetFile);
 			ImageIO.write(image, "png", outputFile);
 		} catch (IOException e) {
@@ -47,6 +51,7 @@ public class Entry {
 		{
 			image = new BufferedImage(pixels[0].length, pixels.length, BufferedImage.TYPE_INT_RGB);
 			
+			// Go through all the pixels of the image and set the corresponding pixel of the BufferedImage
 			for (int y = 0; y < pixels.length; ++y) {
 				for (int x = 0; x < pixels[y].length; ++x) {
 					int rgb = pixels[y][x].toRGB();

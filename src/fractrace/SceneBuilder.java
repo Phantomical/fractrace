@@ -91,6 +91,8 @@ public class SceneBuilder {
 				return gson.fromJson(elem, Mandelbulb.class);
 			case "scale":
 				return gson.fromJson(elem, Scale.class);
+			case "union":
+				return gson.fromJson(elem, Union.class);
 			default:
 				throw new JsonParseException("Unknown shape type: " + typename);
 			}
