@@ -6,7 +6,7 @@ import fractrace.Vector;
 public class Union implements Traceable {
 	private Traceable object1;
 	private Traceable object2;
-	private Vector colour;
+	private Vector colour = new Vector(1, 1, 1);
 	
 	@Override
 	public double distanceFromPoint(Vector a) {
