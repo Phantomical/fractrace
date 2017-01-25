@@ -30,11 +30,13 @@ public class SierpinskiOctahedral implements Traceable {
 		double r = x * x + y * y + z * z;
 		int n = 0;
 		for (; n < iterations && r < bailout; ++n) {
+			// Do the necessary folds 
 			x = Math.abs(x); y = Math.abs(y); z = Math.abs(z);
 			if (x + y < 0) { double x1 = -y; y = -x; x = x1; }
 			if (x + z < 0) { double x1 = -z; z = -x; x = x1; }
 			if (y + z < 0) { double y1 = -z; z = -y; y = y1; }
 			
+			// Scale down for the subtriangles
 			x = scale * x - (scale - 1);
 			y = scale * y - (scale - 1);
 			z = scale * z - (scale - 1);
@@ -42,6 +44,7 @@ public class SierpinskiOctahedral implements Traceable {
 			r = x * x + y * y + z * z;
 		}
 		
+		// Scale the distance back up
 		return (Math.sqrt(r) - 2) * Math.pow(scale, -n);
 	}
 

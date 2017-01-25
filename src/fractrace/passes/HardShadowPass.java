@@ -14,6 +14,8 @@ public class HardShadowPass implements ImagePass, SceneHook {
 	@Override
 	public void execute(TraceResult target) {
 		if (target.isFinite()) {
+			// To determine if we are in shadow cast a ray towards the 
+			// light and determine if it intersects an object
 			final Vector point = target.endpoint();
 			final Ray shadowRay = new Ray(add(point, mul(tracedir, threshold)), tracedir);
 			TraceResult res = TraceDriver.traceRay(scene, shadowRay);
@@ -39,6 +41,8 @@ public class HardShadowPass implements ImagePass, SceneHook {
 	
 	@PostDeserialize
 	private void deserializeHook() {
+		// Use the light direction to calculate
+		// the direction that needs to be traced
 		tracedir = normalize(lightdir).negate();
 		SceneBuilder.registerSceneHook(this);
 	}

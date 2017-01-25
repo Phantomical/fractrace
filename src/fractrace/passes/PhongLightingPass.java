@@ -13,6 +13,9 @@ public class PhongLightingPass implements ImagePass {
 	@Override
 	public void execute(TraceResult target) {
 		if (target.isFinite()) {
+			// To do the lighting get the dot product of the 
+			// normal and the light direction and clamp the
+			// resulting value between 0 and 1
 			final Vector normal = normalize(target.object
 					.normalAtPoint(target.endpoint()));
 			final double mult = clamp(dot(normal, lightdir), 0, 1);
@@ -22,6 +25,8 @@ public class PhongLightingPass implements ImagePass {
 	}
 	
 	public PhongLightingPass() {
+		// Initialize with some reasonable constants
+		// if the user doesn't provide any
 		lightdir = new Vector(0, 1, 0);
 		colour = new Vector(1, 1, 1);
 	}
@@ -33,6 +38,7 @@ public class PhongLightingPass implements ImagePass {
 	
 	@PostDeserialize
 	private void deserializeHook() {
+		// Setup the lightdir from the deserialized direction
 		lightdir = normalize(lightdir).negate();
 	}
 

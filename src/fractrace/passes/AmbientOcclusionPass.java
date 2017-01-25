@@ -13,6 +13,8 @@ public class AmbientOcclusionPass implements SceneHook, ImagePass {
 	@Override
 	public void execute(TraceResult target) {
 		if (target.isFinite()) {
+			// The amount we darken by is the ratio of the distance
+			// a little off the plane and the actual distance
 			Vector normal = target.object.normalAtPoint(target.endpoint());
 			Vector point = add(target.endpoint(), mul(normal, offset));
 
@@ -20,6 +22,8 @@ public class AmbientOcclusionPass implements SceneHook, ImagePass {
 			Tuple<Double, Traceable> dist = TraceDriver.calcStepDistance(scene, point);
 			double d2 = dist.x;
 			
+			// Negative distances don't work so
+			// clamp them to 0
 			if (d2 < 0)
 				d2 = 0.0;
 						

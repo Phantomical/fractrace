@@ -30,10 +30,12 @@ public class Sierpinski implements Traceable {
 		double r = x * x + y * y + z * z;
 		int n = 0;
 		for (; n < iterations && r < bailout; ++n) {
+			// Perform our folds
 			if (x + y < 0) { double x1 = -y; y = -x; x = x1; }
 			if (x + z < 0) { double x1 = -z; z = -x; x = x1; }
 			if (y + z < 0) { double y1 = -z; z = -y; y = y1; }
 			
+			// Scale the point down again
 			x = scale * x - (scale - 1);
 			y = scale * y - (scale - 1);
 			z = scale * z - (scale - 1);
@@ -41,6 +43,7 @@ public class Sierpinski implements Traceable {
 			r = x * x + y * y + z * z;
 		}
 		
+		// Scale the distance back to normal scale
 		return (Math.sqrt(r) - 2) * Math.pow(scale, -n);
 	}
 

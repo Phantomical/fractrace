@@ -49,6 +49,7 @@ public class Entry {
 		
 		if (pixels.length != 0)
 		{
+			// Create a new buffered image with the same size as the pixel buffer
 			image = new BufferedImage(pixels[0].length, pixels.length, BufferedImage.TYPE_INT_RGB);
 			
 			// Go through all the pixels of the image and set the corresponding pixel of the BufferedImage

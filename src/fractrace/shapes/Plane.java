@@ -11,6 +11,8 @@ public class Plane implements Traceable {
 	
 	@Override
 	public double distanceFromPoint(Vector a) {
+		// Distance formula for a plane:
+		// (-(p - a) . normal) / ||normal||
 		Vector w = sub(position, a).negate();
 		return dot(normal, w) / normal.magnitude();
 	}
@@ -26,6 +28,7 @@ public class Plane implements Traceable {
 	}
 
 	public Plane() {
+		// Default values
 		position = new Vector(0, 0, 0);
 		colour = new Vector(0, 0, 0);
 		normal = new Vector(0, 1, 0);

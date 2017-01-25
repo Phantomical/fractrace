@@ -11,6 +11,7 @@ public class Sphere implements Traceable {
 	
 	@Override
 	public double distanceFromPoint(Vector a) {
+		// Signed distance from a sphere is |a-p| - r
 		return sub(position, a).magnitude() - radius;
 	}
 

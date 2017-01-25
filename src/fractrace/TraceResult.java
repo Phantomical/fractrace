@@ -26,6 +26,7 @@ public final class TraceResult {
         return ray.getPointAt(distance);
     }
     public Boolean isFinite() {
+    	// Check whether this ray has an endpoint
     	return Double.isFinite(distance);
     }
     

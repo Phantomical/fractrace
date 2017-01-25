@@ -10,6 +10,7 @@ public class Union implements Traceable {
 	
 	@Override
 	public double distanceFromPoint(Vector a) {
+		// The union of two distance fields is min(d1, d2)
 		return Math.min(
 				object1.distanceFromPoint(a), 
 				object2.distanceFromPoint(a));

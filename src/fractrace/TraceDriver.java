@@ -34,16 +34,25 @@ public final class TraceDriver {
 		TraceResult result = null;
 
 		int iterations = 0;
+		// Iterate until the distance to an object is below the threshold
+		// or until the ray is beyond the max distance
 		while (result == null)
 		{
+			// Calculate the step from the current position
 			Tuple<Double, Traceable> step = calcTraceStep(dat);
 			double newdist = dat.currentDist + step.x;
+			// If there are no possible intersections
+			// or the ray has gone beyond the maximum
+			// distance than return and infinite ray
 			if (newdist > dat.maxdist || dat.possible.length == 0) {
 				result = new TraceResult(dat.ray, null, Double.POSITIVE_INFINITY);
 			}
+			// If the step size is under the threshold then 
+			// indicate that the object has been hit
 			else if (step.x < dat.threshold) {
 				result = new TraceResult(dat.ray, step.y, newdist);
 			}
+			// Otherwise move forward and repeat
 			else {
 				dat.currentDist += step.x;
 				iterations++;
@@ -62,6 +71,7 @@ public final class TraceDriver {
 		Traceable[] possible = filter(sc.objects, ray);
 		TraceData dat = new TraceData(sc.threshold, 0, sc.maxDistance, ray, possible);
 
+		// Build a trace data structure and call the implementation
 		return traceImpl(dat);
 	}
 
@@ -71,11 +81,15 @@ public final class TraceDriver {
 		final double xmult = 2.0 / ((double)sc.height - 1);
 		final double ymult = 2.0 / ((double)sc.width - 1);
 
+		// Trace all the rays for the pixel
 		for (int sample = 0; sample < sc.samples; ++sample) {
+			// Calculate the jitter values
 			final double jitterx = Math.random() * xmult * 0;
 			final double jittery = Math.random() * ymult * 0;
+			// Calculate the ray pixel direction
 			final double posy = (((double)y + jitterx) * xmult) - 1;
 			final double posx = (((double)x + jittery) * ymult) - 1;
+			// Trace the ray provided
 			results[sample] = traceRay(sc, new Ray(sc.camera, posx, posy));
 		}
 		

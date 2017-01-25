@@ -31,6 +31,8 @@ public final class Camera {
     
 	@PostDeserialize
 	private void deserializeHook() {
+		// The angles in the spec files are given
+		// in degrees, convert them to radians
 		fovx *= DEG2RAD;
 		fovy *= DEG2RAD;
 	}

@@ -23,7 +23,8 @@ public final class Ray implements Cloneable {
         direction = normalize(rotate(rotate(cam.forward, up, halfx), right, halfy));
     }
 
-    public Vector getPointAt(double distance) {
+    // Go a certain distance along the ray and return the point at that distance
+    public Vector getPointAt(double distance) {    	
         return add(start, mul(direction, distance));
     }
 }
